@@ -15,6 +15,6 @@
         assign_public_ip: yes
         wait: yes
         aws_access_key: "{{ access_key }}" 
-        aws_security_key: "{{ security_key }}" 
-        security_token: "{{ session_token }}" 
-     
+        aws_security_key: "{{ secret_key }}" 
+        security_token: "{{ session_token }}"
+        

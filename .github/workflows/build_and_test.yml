@@ -100,4 +100,4 @@ jobs:
             echo "${{ secrets.AWS_KEY }}" > devops.pem
             chmod 400 devops.pem
             cd ansible
-            ANSIBLE_HOST_KEY_CHECKING=False ~/.local/bin/ansible-playbook ec2_deploy.yml --extra-vars "access_key=${{secrets.AWS_ACCESS_KEY_ID}} secret_key=${{secrets.AWS_SECRET_ACCESS_KEY}} session_token=${{secrets.AWS_SESSION_TOKEN}}" --user ec2-user --key-file ../devops.pem
+            ANSIBLE_HOST_KEY_CHECKING=False ~/.local/bin/ansible-playbook ec2_deploy.yml --vault-pass ${{secrets.VAULT}} --extra-vars "access_key=${{secrets.AWS_ACCESS_KEY_ID}} secret_key=${{secrets.AWS_SECRET_ACCESS_KEY}} session_token=${{secrets.AWS_SESSION_TOKEN}}" --user ec2-user --key-file ../devops.pem

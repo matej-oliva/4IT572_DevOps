@@ -95,8 +95,8 @@ jobs:
           username: ${{secrets.USER}}
           key: ${{ secrets.AWS_KEY }}
           script: |
-            git clone https://github.com/matej-oliva/4IT572_DevOps.git
             cd 4IT572_DevOps
+            git pull
             echo "${{ secrets.AWS_KEY }}" > devops.pem
             chmod 400 devops.pem
             cd ansible

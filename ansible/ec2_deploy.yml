@@ -6,6 +6,7 @@
     - name: Launch EC2 Instance
       ec2:
         instance_type: t2.micro
+        image: ami-0b0dcb5067f052a63
         region: us-east-1
         key_name: devops
         vpc_subnet_id: subnet-0a4eedf42968bcd28

@@ -11,7 +11,6 @@
         key_name: devops
         vpc_subnet_id: subnet-0a4eedf42968bcd28
         count: 1
-        group: eshop
         assign_public_ip: yes
         wait: yes
         aws_access_key: "{{ access_key }}" 

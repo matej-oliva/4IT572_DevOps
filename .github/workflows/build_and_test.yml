@@ -81,3 +81,23 @@ jobs:
         run: |
           npm run test -- --colors
   
+  Deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    needs: [Build, Test]
+    if: ${{ github.ref == 'refs/heads/master' }}
+
+    steps:
+      - name: SSH connection
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{secrets.HOST}}
+          username: ${{secrets.USER}}
+          key: ${{ secrets.AWS_KEY }}
+          script: |
+            git clone https://github.com/matej-oliva/4IT572_DevOps.git
+            cd 4IT572_DevOps
+            echo "${{ secrets.AWS_KEY }}" > devops.pem
+            chmod 400 devops.pem
+            cd ansible
+            ANSIBLE_HOST_KEY_CHECKING=False ~/.local/bin/ansible-playbook ec2_deploy.yml --extra-vars "access_key=${{secrets.AWS_ACCESS_KEY_ID}} secret_key=${{secrets.AWS_SECRET_ACCESS_KEY}} session_token=${{secrets.AWS_SESSION_TOKEN}}" --user ec2-user --key-file ../devops.pem

@@ -63,7 +63,7 @@
         repo: 'https://github.com/matej-oliva/4IT572_DevOps.git'
         dest: ./app
     - name: Build docker image
-      shell: cd app && docker build -t myeshop:latest
+      shell: cd app && docker build -t myeshop:latest .
       become: yes
     - name: Run eshop
       shell: docker run -p 80:3000:myeshop
